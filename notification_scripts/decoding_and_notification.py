@@ -8,7 +8,12 @@ from pyfcm import FCMNotification
 file_name = "announcement.wav"
 
 API_Key = "AAAAnwZ5EsA:APA91bHATVu6_6E2msLVSkEMThEjFV-EF5v46YxJasDOoiSKHJepvLXM1mAWqS5DvegDD-GeGff3wHIIBI4Fa9eNmDzfsmx_GUT_aK2izfhf9ZHNJRDemiLU0IFcsxeyOollVxeassGj"
-registration_id = "eAKJmc3xIPU:APA91bF_Texdh9utHRPaKgK383nkyHwmpjlVnVl-BociO6Wj_tTxiERvnjAaQp7EOamzvNy7fe2l_fexppq7lZdLO3eMl-VxcFq28sMh0f9_zbnxn6jBTMNi50nholyuqQFIR-YEFvKr"
+
+# aman
+# registration_id = "eAKJmc3xIPU:APA91bF_Texdh9utHRPaKgK383nkyHwmpjlVnVl-BociO6Wj_tTxiERvnjAaQp7EOamzvNy7fe2l_fexppq7lZdLO3eMl-VxcFq28sMh0f9_zbnxn6jBTMNi50nholyuqQFIR-YEFvKr"
+
+# bhavesh
+registration_id = "faQh_io9jRM:APA91bHwZcCHkJ5V5Frgraggo7XHZtpdIR7fwFtf3dAVatfEBgmq8drRmiXGJuR26aErWZoBhWKk5IVHQFDG2qL69r5mCTmE0vYrRo68GKlTPmk38X5hcAjySbnqijTEXGuHWUhKJG7Z"
 
 
 ### short time fourier transform of audio signal ###
@@ -92,7 +97,7 @@ def get_code_from_spectrogram( cols, timebins):
             strech_count = 0
     # print( "min_buffer=", str(min_buffer) )
     present = np.trim_zeros(present)
-    if 0:
+    if 1:
         plt.plot( present )
         axes = plt.gca()
         axes.set_xlim([0,len(present)])
@@ -174,13 +179,14 @@ def decode_msg(audiopath, binsize=2**9, plotpath=None, colormap="jet"):
     cols = cols[0]
     codes = get_code_from_spectrogram( cols, timebins)
     msg  = get_string_from_code( codes )
+    send_notification(msg)
 
     # cut the region
-    if 1:
+    if 0:
         ims = ims[:, start_index:end_index]
 
     # plot the spectrogram
-    if 0:
+    if 1:
         plt.figure(figsize=(15, 7.5))
         plt.imshow(np.transpose(ims), origin="lower", aspect="auto", cmap=colormap)
         plt.colorbar()
@@ -214,4 +220,4 @@ def send_notification(message):
 
 # plotstft("concat.wav")
 msg = decode_msg( file_name )
-send_notification(msg)
+

@@ -1,7 +1,21 @@
 import time
 from subprocess import call
 
+
+
+
+
+
+##################################
+
 msg = "train is late"
+
+##################################
+
+
+
+
+
 
 def get_bin_arr(character):
 	bin_lenth = 5
