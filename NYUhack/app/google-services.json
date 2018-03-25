@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "683008398016",
+    "firebase_url": "https://detector-db9bf.firebaseio.com",
+    "project_id": "detector-db9bf",
+    "storage_bucket": "detector-db9bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683008398016:android:9b92052c6416992d",
+        "android_client_info": {
+          "package_name": "com.example.abhinavjain.nyuhack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683008398016-k4ums81ukdkg77deoqqa0i4hf1b4ufgc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQerqtKBFAO0m4GY8hnvP1dCg4Gu8lJcY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
