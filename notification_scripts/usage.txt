@@ -1,0 +1,33 @@
+##############################################################################################################
+####   Please note that the scripts were developed on macOS. They might require changes for other OS's.   ####
+##############################################################################################################
+
+
+############################
+####   Dependent Modules ###
+####   1. SOX            ###
+####   2. pyfcm (pip)    ###
+############################
+
+
+########################################################################################################################
+The idea is to do the decoding on the mobile/wearable device and notify user on it.
+The following implementation is for proof of concept implementation / sample scripts.
+
+This file describes the steps to -
+1. Generate encoded high frequency sounds, along with text-to-speech, as is common in automated announcement systems.
+2. Record the generated sound.
+3. Decode the recorded sound.
+4. Send Notification to the user.
+########################################################################################################################
+
+
+########################################################################################################################
+Sequence to run the scripts -
+1. Change the message in 'speaker_encoding.py'
+2. Run 'python record_audio.py' to start recording.
+3. Run 'python speaker_encoding.py' to produce the audio from speaker.
+4. Stop the recording by killing the 'python record_audio.py' command.
+5. Change the App parameters in 'decoding_and_notifications.py'.
+6. Run 'python decoding_and_notifications.py'. It will decode the message from audio file and send notification.
+########################################################################################################################

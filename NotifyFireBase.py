@@ -1,9 +1,0 @@
-from pyfcm import FCMNotification
-
-push_service = FCMNotification(api_key="AAAAnwZ5EsA:APA91bHATVu6_6E2msLVSkEMThEjFV-EF5v46YxJasDOoiSKHJepvLXM1mAWqS5DvegDD-GeGff3wHIIBI4Fa9eNmDzfsmx_GUT_aK2izfhf9ZHNJRDemiLU0IFcsxeyOollVxeassGj")
-
-registration_id = "eAKJmc3xIPU:APA91bF_Texdh9utHRPaKgK383nkyHwmpjlVnVl-BociO6Wj_tTxiERvnjAaQp7EOamzvNy7fe2l_fexppq7lZdLO3eMl-VxcFq28sMh0f9_zbnxn6jBTMNi50nholyuqQFIR-YEFvKr"
-message_title = "Uber update"
-message_body = "Hi Aman,"
-result = push_service.notify_single_device(registration_id=registration_id, message_title=message_title, message_body=message_body)
-print (result)
