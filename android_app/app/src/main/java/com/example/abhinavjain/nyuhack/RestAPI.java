@@ -23,12 +23,6 @@ import retrofit2.http.Part;
 
 public interface RestAPI {
 
-    @GET("/")
-    Call<EmotionModel> getEmotion(@Body EmotionModel em);
-
-    @POST
-    Call<ResponseBody> sendTokenToServer(@Body String token);
-
     @Multipart
     @POST("/analyze")
     Call<EmotionModel> uploadAudio(

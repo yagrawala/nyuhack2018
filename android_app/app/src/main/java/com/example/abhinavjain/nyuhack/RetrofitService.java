@@ -34,7 +34,6 @@ public class RetrofitService {
     }
 
     public void setRetrofit() {
-        new RetrofitService();
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
@@ -43,20 +42,8 @@ public class RetrofitService {
                 .baseUrl("http://192.168.43.196:5000") //192.168.43.196:5000 35.224.23.142:5000
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
-            .build();
+                .build();
         api = retrofit.create(RestAPI.class);
-    }
-
-
-    public EmotionModel getEmotion() {
-
-        try {
-            Call<EmotionModel> call = api.getEmotion(new EmotionModel());
-            return call.execute().body();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public void sendRegistrationToServer(String token) {
@@ -67,10 +54,7 @@ public class RetrofitService {
     public void uploadFile(String path, Uri uri, String text, Context context, Callback<EmotionModel> callback) {
 
 
-        // https://github.com/iPaulPro/aFileChooser/blob/master/aFileChooser/src/com/ipaulpro/afilechooser/utils/FileUtils.java
-        // use the FileUtils to get the actual file by uri
         File file = new File(path);
-
         // create RequestBody instance from file
         RequestBody requestFile =
                 RequestBody.create(
@@ -91,6 +75,5 @@ public class RetrofitService {
         // finally, execute the request
         Call<EmotionModel> call = api.uploadAudio(description, body);
         call.enqueue(callback);
-        //return
     }
 }
