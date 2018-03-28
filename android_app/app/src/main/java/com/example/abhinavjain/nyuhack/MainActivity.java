@@ -66,44 +66,25 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView txtSpeechInput;
     private FloatingActionButton btnSpeak;
     private DrawerLayout drawerLayout;
     private final int REQ_CODE_SPEECH_INPUT = 100;
-    private MediaRecorder recorder;
-    String AudioSavePathInDevice = null;
-    static boolean flag = true;
     private LinearLayout list;
     private ScrollView scrollView;
-    List<EmotionModel> dataList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_layout);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
-//        setContentView(R.layout.activity_main);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         list = (LinearLayout) findViewById(R.id.list);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
-        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-        //setSupportActionBar(toolbar);
-        //ActionBar actionBar = getSupportActionBar();
-        //actionBar.setDisplayHomeAsUpEnabled(true);
-        //actionBar.setHomeAsUpIndicator(R.drawable.drawer_icon);
-        setTitle("NYUhack");
-        //txtSpeechInput = (TextView) findViewById(R.id.txtSpeechInput);
         btnSpeak = (FloatingActionButton) findViewById(R.id.mic);
 
-//        String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
-//                Settings.Secure.ANDROID_ID);
-//        Log.d("qwe- ", android_id);
-        // hide the action bar
-        //getSupportActionBar().hide();
-        if (!checkPermission()) requestPermission();
+        setTitle("NYUhack");
+        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
 
-        //promptSpeechInput();
+        if (!checkPermission()) requestPermission();
         btnSpeak.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -111,8 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 promptSpeechInput();
             }
         });
-
-
     }
 
     public void addListItem(EmotionModel model) {
@@ -122,26 +101,23 @@ public class MainActivity extends AppCompatActivity {
         TextView text = (TextView) view.findViewById(R.id.text);
         TextView tag = (TextView) view.findViewById(R.id.tag1);
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linear);
-        text.setTypeface(null,Typeface.BOLD);
+        text.setTypeface(null, Typeface.BOLD);
         text.setText(model.text);
-        tag.setTypeface(null,Typeface.BOLD);
+        tag.setTypeface(null, Typeface.BOLD);
         tag.setTypeface(null, Typeface.ITALIC);
-        tag.setText("#"+ model.tag);
+        tag.setText("#" + model.tag);
 
         if (model.tag.equalsIgnoreCase("anger")) {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.red));
-             //cv_back.setCardBackgroundColor(Color.RED);
         } else if (model.tag.equalsIgnoreCase("happy")) {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.green));
-            //cv_back.setCardBackgroundColor(Color.GREEN);
         } else if (model.tag.equalsIgnoreCase("warning")) {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.yellow));
-            //cv_back.setCardBackgroundColor(Color.YELLOW);
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext())
                     .setContentTitle("Warning received")
                     .setContentText(model.text)
-                    .setVibrate(new long[] {1000, 1000})
+                    .setVibrate(new long[]{1000, 1000})
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
             NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -153,22 +129,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         list.addView(view);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            list.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-                @Override
-                public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-                    Log.d("qwe", "scrolled");
-                }
-            });
-        }
         scrollView.post(new Runnable() {
             @Override
             public void run() {
                 scrollView.fullScroll(ScrollView.FOCUS_DOWN);
             }
         });
-        //btnSpeak.performClick();
     }
 
     @Override
@@ -190,40 +156,6 @@ public class MainActivity extends AppCompatActivity {
         return result == PackageManager.PERMISSION_GRANTED &&
                 result1 == PackageManager.PERMISSION_GRANTED;
     }
-
-//    private void recordAudio() {
-//        if(checkPermission()) {
-//
-//            AudioSavePathInDevice =
-//                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
-//                            CreateRandomAudioFileName(5) + "AudioRecording.mp3";
-//            Log.e("qwe- ", AudioSavePathInDevice);
-//            MediaRecorderReady();
-//
-//            try {
-//                recorder.prepare();
-//                recorder.start();
-//            } catch (IllegalStateException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            Toast.makeText(MainActivity.this, "Recording started " + AudioSavePathInDevice,
-//                    Toast.LENGTH_LONG).show();
-//        } else {
-//            requestPermission();
-//        }
-//    }
-//
-//    private void stopRecording() {
-//        try {
-//            if (recorder != null)
-//                recorder.stop();
-//        } catch (IllegalStateException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     /**
      * Showing google speech input dialog
@@ -304,14 +236,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void MediaRecorderReady() {
-        recorder = new MediaRecorder();
-        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        recorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
-        recorder.setOutputFile(AudioSavePathInDevice);
-    }
-
     public String CreateRandomAudioFileName(int string) {
         StringBuilder stringBuilder = new StringBuilder(string);
         int i = 0;
@@ -342,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if (StoragePermission && RecordPermission) {
                         //Toast.makeText(MainActivity.this, "Permission Granted",
-                          //      Toast.LENGTH_LONG).show();
+                        //      Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Permission Denied", Toast.LENGTH_LONG).show();
                     }
